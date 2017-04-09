@@ -221,6 +221,7 @@ Tags are deleted from the current file entirely in Emacs, which can be slow."
     (eltu-noisy "Will update tags with backend %S" eltu-backend)
     (funcall eltu-backend)))
 
+;;;###autoload
 (define-minor-mode eltu-mode
     "Minor mode to automatically update the TAGS file after saving this buffer."
   nil nil nil
