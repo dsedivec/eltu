@@ -1,4 +1,4 @@
-;;; eltu -- Emacs Lisp TAGS Updater  -*- lexical-binding: t; -*-
+;;; eltu.el --- Emacs Lisp TAGS Updater  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2017  Dale Sedivec
 ;;
