@@ -4,7 +4,7 @@
 ;;
 ;; Author: Dale Sedivec <dale@codefu.org>
 ;; Keywords: tags ctags etags
-;; Version: 0.1
+;; Version: 0.2
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -108,13 +108,13 @@ the completion of tags updating.")
 
 (defun eltu-get-tags-command (tags-file files-to-update)
   "Return a tags command to generate TAGS-FILE from FILES-TO-UPDATE."
-  (nconc (cl-ecase eltu-tags-command-style
-           (exuberant-ctags (list eltu-exuberant-ctags-command "-e" "-a"
-                                  "-f" tags-file
-                                  eltu-exuberant-ctags-additional-arguments))
-           (etags (list eltu-etags-command "-a" "-o" tags-file
-                        eltu-etags-additional-arguments)))
-         files-to-update))
+  (append (cl-ecase eltu-tags-command-style
+            (exuberant-ctags (append (list eltu-exuberant-ctags-command
+                                           "-e" "-a" "-f" tags-file)
+                                     eltu-exuberant-ctags-additional-arguments))
+            (etags (append (list eltu-etags-command "-a" "-o" tags-file)
+                           eltu-etags-additional-arguments)))
+          files-to-update))
 
 (defun eltu-log-debug (message &rest args)
   "Write MESSAGE, interpolating ARGS, if `eltu-debug' is true."

@@ -65,6 +65,7 @@ def main(argv):
                 else:
                     logging.debug("ignoring tags for that file")
                     old_tags_file.seek(int(tags_size), os.SEEK_CUR)
+        logging.debug("ctags_command=%r", ctags_command)
         subprocess.check_call(ctags_command)
         logging.debug("replacing %r with %r", tags_file, new_tags_file.name)
         shutil.move(temp_tags_file, tags_file)
