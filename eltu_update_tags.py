@@ -19,8 +19,6 @@ def main(argv):
     # temp file if things blow up.
     temp_tags_file = argv[2]
     try:
-        logging.basicConfig(filename="/tmp/eltu-python.log",
-                            level=logging.DEBUG)
         ctags_command = json.loads(argv[1])
         tags_file = argv[3]
         tags_file_dir = os.path.abspath(os.path.dirname(tags_file))
