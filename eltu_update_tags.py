@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 #
 # Currently requires Python 2.6 because of the use of the json module.
 # Also using subprocess.check_call which is 2.5.

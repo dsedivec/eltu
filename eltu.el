@@ -4,7 +4,7 @@
 ;;
 ;; Author: Dale Sedivec <dale@codefu.org>
 ;; Keywords: tags ctags etags
-;; Version: 0.2
+;; Version: 0.3
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
