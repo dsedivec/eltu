@@ -275,7 +275,7 @@ Emacs do it, too."
                (python-script (expand-file-name "eltu_update_tags.py"
                                                 eltu-dir))
                ;; XXX factor string out to variable?
-               (python-command (append (list "python2" python-script
+               (python-command (append (list "python" python-script
                                              tags-command-json temp-file
                                              (buffer-file-name))
                                        files-to-update)))
