@@ -4,7 +4,7 @@
 ;;
 ;; Author: Dale Sedivec <dale@codefu.org>
 ;; Keywords: tags ctags etags
-;; Version: 0.3
+;; Version: 0.4
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -294,18 +294,19 @@ to update."
   (eltu-log-debug "May update tags")
   (when (and eltu-files-to-update
              (visit-tags-table-buffer))
-    (when (eltu-update-in-progress-p)
-      (error "`eltu-update-tags' called while update already in progress"))
-    (eltu-log-debug "Will update tags with backend %S" eltu-backend)
-    (let ((files-to-update eltu-files-to-update))
-      (setq eltu-files-to-update nil
-            eltu-update-in-progress t)
-      (condition-case err
-          (funcall eltu-backend files-to-update)
-        (error
-         (setq eltu-update-in-progress nil)
-         ;; Should we put eltu-files-to-update back to its original value?
-         (signal (car err) (cdr err)))))))
+    (if (eltu-update-in-progress-p)
+        (eltu-log-debug
+         "`eltu-update-tags' call ignored because update already in progress")
+      (eltu-log-debug "Will update tags with backend %S" eltu-backend)
+      (let ((files-to-update eltu-files-to-update))
+        (setq eltu-files-to-update nil
+              eltu-update-in-progress t)
+        (condition-case err
+            (funcall eltu-backend files-to-update)
+          (error
+           (setq eltu-update-in-progress nil)
+           ;; Should we put eltu-files-to-update back to its original value?
+           (signal (car err) (cdr err))))))))
 
 ;;;###autoload
 (define-minor-mode eltu-mode
