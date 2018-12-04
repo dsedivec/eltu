@@ -19,6 +19,10 @@ def main(argv):
     # temp file if things blow up.
     temp_tags_file = argv[2]
     try:
+        try:
+            fsdecode = os.fsdecode
+        except AttributeError:
+            fsdecode = lambda x: x
         ctags_command = json.loads(argv[1])
         tags_file = argv[3]
         tags_file_dir = os.path.abspath(os.path.dirname(tags_file))
@@ -42,18 +46,19 @@ def main(argv):
                 if not form_feed:
                     # EOF
                     break
-                elif form_feed != "\f\n":
+                elif form_feed != b"\f\n":
                     raise Exception(("expected form feed in tags file,"
                                      " instead got %r near %d")
                                     % (form_feed, old_tags_file.tell()))
                 file_line = old_tags_file.readline()
                 try:
-                    file_name, tags_size = file_line.rstrip().rsplit(r",", 1)
-                except Exception, ex:
+                    file_name, tags_size = file_line.rstrip().rsplit(b",", 1)
+                except Exception as ex:
                     raise Exception(
                         "couldn't parse tags file line %r near %d: %s: %s"
                         % (file_line, old_tags_file.tell(),
                            ex.__class__.__name__, ex))
+                file_name = fsdecode(file_name)
                 logging.debug("found file name: %s", file_name)
                 if not file_names_regexp.search(file_name):
                     logging.debug("copying tags for that file")
