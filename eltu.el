@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017  Dale Sedivec
 ;;
 ;; Author: Dale Sedivec <dale@codefu.org>
-;; Keywords: tags ctags etags
+;; Keywords: tools
 ;; Version: 0.6
 ;;
 ;; This program is free software; you can redistribute it and/or modify
