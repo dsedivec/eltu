@@ -4,7 +4,7 @@
 ;;
 ;; Author: Dale Sedivec <dale@codefu.org>
 ;; Keywords: tags ctags etags
-;; Version: 0.5
+;; Version: 0.6
 ;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -26,20 +26,20 @@
 (require 'subr-x)
 (require 'json)
 
-(defcustom eltu-tags-command-style 'exuberant-ctags
+(defcustom eltu-tags-command-style 'universal-ctags
   "Defines the command line interface for your tags command.
 
-This can be one of the symbols exuberant-ctags or etags."
+This can be one of the symbols universal-ctags or etags."
   :type '(choice
-          (const :tag "Exuberant Ctags" exuberant-ctags)
+          (const :tag "Universal Ctags" universal-ctags)
           (const :tag "etags" etags)))
 
-(defcustom eltu-exuberant-ctags-command "ctags"
-  "Command to run for Exuberant Ctags."
+(defcustom eltu-universal-ctags-command "uctags"
+  "Command to run for Universal Ctags."
   :type 'string)
 
-(defcustom eltu-exuberant-ctags-additional-arguments nil
-  "List of additional arguments to be passed to Exuberant Ctags."
+(defcustom eltu-universal-ctags-additional-arguments nil
+  "List of additional arguments to be passed to Universal Ctags."
   :type '(repeat string))
 
 (defcustom eltu-etags-command "etags"
@@ -109,9 +109,9 @@ the completion of tags updating.")
 (defun eltu-get-tags-command (tags-file files-to-update)
   "Return a tags command to generate TAGS-FILE from FILES-TO-UPDATE."
   (append (cl-ecase eltu-tags-command-style
-            (exuberant-ctags (append (list eltu-exuberant-ctags-command
+            (universal-ctags (append (list eltu-universal-ctags-command
                                            "-e" "-a" "-f" tags-file)
-                                     eltu-exuberant-ctags-additional-arguments))
+                                     eltu-universal-ctags-additional-arguments))
             (etags (append (list eltu-etags-command "-a" "-o" tags-file)
                            eltu-etags-additional-arguments)))
           files-to-update))
