@@ -30,6 +30,11 @@
 (require 'subr-x)
 (require 'json)
 
+(defgroup eltu nil
+  "Automatically update TAGS files."
+  :group 'programming
+  :prefix "eltu-")
+
 (defcustom eltu-tags-command-style 'universal-ctags
   "Defines the command line interface for your tags command.
 
