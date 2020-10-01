@@ -101,7 +101,7 @@ the completion of tags updating.")
   "Buffer used for logging output of eltu work and external commands.")
 
 (defun eltu-update-in-progress-p ()
-  "Return true if a tags update is already in progress."
+  "Return non-nil if a tags update is already in progress."
   (if (processp eltu-update-in-progress)
       (process-live-p eltu-update-in-progress)
     eltu-update-in-progress))
